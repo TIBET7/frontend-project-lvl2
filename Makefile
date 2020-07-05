@@ -1,2 +1,2 @@
 start:
-	@npx babel-node bin/gendiff.js -h
+	@npx babel-node --experimental-json-modules bin/gendiff.js -h

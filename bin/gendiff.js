@@ -1,8 +1,9 @@
 import program from 'commander';
-
+import version from '../package.json';
+import  description from '../package.json';
 
 program
-    .version('1.0.0')
-    .description('Compares two configuration files and shows a difference.');
+    .version(version)
+    .description(description);
 
 program.parse(process.argv);
