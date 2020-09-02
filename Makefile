@@ -1,2 +1,6 @@
 start:
-	@npx babel-node bin/gendiff.js -h
+	@node bin/gendiff.js -h
+	
+
+
+
