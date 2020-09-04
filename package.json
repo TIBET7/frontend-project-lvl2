@@ -27,10 +27,14 @@
     "dist"
   ],
   "dependencies": {
-    "commander": "^5.1.0"
+    "commander": "^5.1.0",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "@babel/node": "^7.10.4",
-    "eslint": "^7.8.1"
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.20.0"
   }
 }
