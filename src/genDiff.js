@@ -4,7 +4,7 @@ import path from 'path';
 
 const getFileData = (filePath) => {
   const absolutePath = path.resolve(process.cwd(), filePath);
-  const fileData = fs.readFileSync(absolutePath, 'utf-8');
+  const fileData = JSON.parse(fs.readFileSync(absolutePath, 'utf-8'));
   return fileData;
 };
 
@@ -33,15 +33,16 @@ const generateAuxiliaryData = (firstFileData, secondFileData) => {
 
 const getDiff = (data) => {
   const res = data.map((item) => {
+    const indent = '  ';
     switch (item.status) {
       case 'unModified':
-        return `  ${item.name}: ${item.value}`;
+        return `${indent}  ${item.name}: ${item.value}`;
       case 'removed':
-        return `- ${item.name}: ${item.value}`;
+        return `${indent}- ${item.name}: ${item.value}`;
       case 'added':
-        return `+ ${item.name}: ${item.value}`;
+        return `${indent}+ ${item.name}: ${item.value}`;
       case 'modified':
-        return `- ${item.name}: ${item.valueRemoved}\n+ ${item.name}: ${item.valueAdded}`;
+        return `${indent}- ${item.name}: ${item.valueRemoved}\n${indent}+ ${item.name}: ${item.valueAdded}`;
       default:
         return 'error: "wrong status property value"';
     }
