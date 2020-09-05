@@ -1,3 +1,6 @@
+install: 
+	@npm install
+
 start:
 	@node bin/gendiff.js -h
 
