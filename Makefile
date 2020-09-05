@@ -1,8 +1,14 @@
 start:
 	@node bin/gendiff.js -h
 
-test: 
+auxTest: 
 	@node bin/gendiff.js file1.json file2.json
+
+jest: 
+	@npm run test
+
+lint: 
+	@npx eslint .
 	
 
 
