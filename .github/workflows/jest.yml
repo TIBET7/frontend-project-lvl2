@@ -1,4 +1,4 @@
-name: jest-test
+name: Jest-test
 
 
 on:
@@ -36,7 +36,7 @@ jobs:
       # Add environment variables
       env:
         CI: true  
-    - name: Run linter
-      # Run Linter
+    - name: Run Jest-test
+      # Run Jest-test
       run: |
         make jest 
