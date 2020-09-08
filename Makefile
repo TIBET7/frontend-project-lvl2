@@ -8,7 +8,7 @@ auxTest:
 	@node bin/gendiff.js file1.json file2.json
 
 jest: 
-	@npm run test
+	npx -n --experimental-vm-modules jest --watch
 
 lint: 
 	@npx eslint .
