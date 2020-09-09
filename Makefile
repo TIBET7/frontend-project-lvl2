@@ -7,7 +7,10 @@ start:
 auxTest: 
 	@node bin/gendiff.js file1.json file2.json
 
-jest: 
+test: 
+	npx -n --experimental-vm-modules jest
+
+jest-watch: 
 	npx -n --experimental-vm-modules jest --watch
 
 lint: 
