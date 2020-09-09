@@ -1,4 +1,4 @@
-name: Jest-test
+name: Test
 
 
 on:
@@ -36,7 +36,7 @@ jobs:
       # Add environment variables
       env:
         CI: true  
-    - name: Run Jest-test
-      # Run Jest-test
+    - name: Run test
+      # Run test
       run: |
-        make jest 
+        make test 
