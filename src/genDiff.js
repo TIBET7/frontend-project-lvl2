@@ -1,12 +1,5 @@
 import _ from 'lodash';
-import fs from 'fs';
-import path from 'path';
-
-const getFileData = (filePath) => {
-  const absolutePath = path.resolve(process.cwd(), filePath);
-  const fileData = JSON.parse(fs.readFileSync(absolutePath, 'utf-8'));
-  return fileData;
-};
+import parseData from './parsers.js';
 
 const generateAuxiliaryData = (firstFileData, secondFileData) => {
   const firstFileDataKeys = Object.keys(firstFileData);
@@ -51,8 +44,8 @@ const getDiff = (data) => {
 };
 
 const genDiff = (firstFile, secondFile) => {
-  const firstFileData = getFileData(firstFile);
-  const secondFileData = getFileData(secondFile);
+  const firstFileData = parseData(firstFile);
+  const secondFileData = parseData(secondFile);
   const auxiliaryData = generateAuxiliaryData(firstFileData, secondFileData);
   return getDiff(auxiliaryData);
 };

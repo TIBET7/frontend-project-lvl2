@@ -10,8 +10,10 @@ const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-const firstFile = getFixturePath('file1.json');
-const secondFile = getFixturePath('file2.json');
+const firstJsonFile = getFixturePath('./file1.json');
+const secondJsonFile = getFixturePath('file2.json');
+const firstYamlFile = getFixturePath('file1.yml');
+const secondYamlFile = getFixturePath('file2.yml');
 
 const correct = `{
   - follow: false
@@ -23,5 +25,6 @@ const correct = `{
 }`;
 
 test('genDiff', () => {
-  expect(genDiff(firstFile, secondFile)).toEqual(correct);
+  expect(genDiff(firstJsonFile, secondJsonFile)).toEqual(correct);
+  expect(genDiff(firstYamlFile, secondYamlFile)).toEqual(correct);
 });
