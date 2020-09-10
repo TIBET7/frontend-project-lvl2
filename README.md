@@ -10,7 +10,7 @@
 
 <p><a href = https://asciinema.org/a/7K9qyeIlZYMF8SWvTJVwvKbuR>Сравнение плоских файлов (JSON)</a></p>
 
-<p><a href = https://asciinema.org/a/dzidkeRSWkYaqrmppGoZlcS5e>Сравнение плоских файлов (YML)</a></p>
+<p><a href = https://asciinema.org/a/dzidkeRSWkYaqrmppGoZlcS5e>Сравнение плоских файлов (YAML)</a></p>
 
-<p><a href = https://asciinema.org/a/WrkXyhR81vQyQXU7vCw05i0gl>Сравнение плоских файлов (YML)</a></p>
+<p><a href = https://asciinema.org/a/WrkXyhR81vQyQXU7vCw05i0gl>Сравнение плоских файлов (ini)</a></p>
 
