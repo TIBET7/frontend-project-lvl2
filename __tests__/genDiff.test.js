@@ -14,6 +14,8 @@ const firstJsonFile = getFixturePath('./file1.json');
 const secondJsonFile = getFixturePath('file2.json');
 const firstYamlFile = getFixturePath('file1.yml');
 const secondYamlFile = getFixturePath('file2.yml');
+const firstInilFile = getFixturePath('file1.ini');
+const secondInilFile = getFixturePath('file2.ini');
 
 const correct = `{
   - follow: false
@@ -27,4 +29,5 @@ const correct = `{
 test('genDiff', () => {
   expect(genDiff(firstJsonFile, secondJsonFile)).toEqual(correct);
   expect(genDiff(firstYamlFile, secondYamlFile)).toEqual(correct);
+  expect(genDiff(firstInilFile, secondInilFile)).toEqual(correct);
 });
