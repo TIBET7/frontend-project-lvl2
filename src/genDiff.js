@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import parseData from './parsers.js';
+import format from './stylish.js';
 
 const generateAuxiliaryData = (firstFileData, secondFileData) => {
   const firstFileDataKeys = Object.keys(firstFileData);
@@ -18,7 +19,7 @@ const generateAuxiliaryData = (firstFileData, secondFileData) => {
       return {
         name: key,
         status: 'parentNode',
-        children: generateAuxiliaryData(firstFileData[key], secondFileData[key]),
+        value: generateAuxiliaryData(firstFileData[key], secondFileData[key]),
       };
     }
     if (firstFileData[key] !== secondFileData[key]) {
@@ -28,34 +29,16 @@ const generateAuxiliaryData = (firstFileData, secondFileData) => {
     }
     return { name: key, status: 'unModified', value: firstFileData[key] };
   });
+  //console.log(getDiff);
   return getDiff;
-};
-
-const getDiff = (data) => {
-  const res = data.map((item) => {
-    const indent = '  ';
-    switch (item.status) {
-      case 'unModified':
-        return `${indent}  ${item.name}: ${item.value}`;
-      case 'removed':
-        return `${indent}- ${item.name}: ${item.value}`;
-      case 'added':
-        return `${indent}+ ${item.name}: ${item.value}`;
-      case 'modified':
-        return `${indent}- ${item.name}: ${item.valueRemoved}\n${indent}+ ${item.name}: ${item.valueAdded}`;
-      default:
-        return 'error: "wrong status property value"';
-    }
-  });
-  return `{\n${res.join('\n')}\n}`;
 };
 
 const genDiff = (firstFile, secondFile) => {
   const firstFileData = parseData(firstFile);
   const secondFileData = parseData(secondFile);
   const auxiliaryData = generateAuxiliaryData(firstFileData, secondFileData);
-  console.log(auxiliaryData);
-  return getDiff(auxiliaryData);
+  //console.log(auxiliaryData);
+  return format(auxiliaryData);
 };
 
 export default genDiff;
