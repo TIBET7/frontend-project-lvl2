@@ -5,21 +5,16 @@ const format = (data, depth = 1) => {
     const { name, status, value, valueRemoved, valueAdded } = item;
     switch (status) {
       case 'removed':
-        return `${indent}- ${name}: ${value}`;
+        return `${indent}- ${name}: ${JSON.stringify(value).replace(/["]/g, '')}`;
       case 'added':
-        return `${indent}+ ${name}: ${value}`;
+        return `${indent}+ ${name}: ${JSON.stringify(value).replace(/["]/g, '')}`;
       case 'unModified':
-        if (typeof value === 'object' && value !== 'null' && !Array.isArray(value)) {
-          return format(value, depth + 1);
-        }
         return `${indent}  ${name}: ${value}`;
       case 'modified':
-        if (typeof value === 'object' && value !== 'null' && !Array.isArray(value)) {
-          return format(value, depth + 1);
-        }
-        return `${indent}- ${name}: ${valueRemoved}\n${indent}+ ${name}: ${valueAdded}`;
+        return `${indent}- ${name}: ${JSON.stringify(valueRemoved).replace(/["]/g, '')}\n
+        ${indent}+ ${name}: ${JSON.stringify(valueAdded).replace(/["]/g, '')}`;
       case 'parentNode':
-        return format(value, depth + 1);
+        return `${indent}  ${name}: ${format(value, depth + 2)}`;
       default:
         return 'error: "wrong status property value"';
     }
