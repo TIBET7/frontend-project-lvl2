@@ -4,8 +4,8 @@ install:
 start:
 	@node bin/gendiff.js -h
 
-auxTest: 
-	@node bin/gendiff.js file1.json file2.json
+aux: 
+	@node bin/gendiff.js file3.json file4.json
 
 test: 
 	npx -n --experimental-vm-modules jest
