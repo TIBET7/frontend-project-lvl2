@@ -2,7 +2,7 @@ const basicIndent = '  ';
 const getIndent = (depth) => basicIndent.repeat(depth);
 const stringify = (item, depth = 1) => {
   if (typeof item === 'object' && item !== 'null' && !Array.isArray(item)) {
-    const dataArr = Object.entries(item).map(([key, value]) => `${getIndent(depth)}${key}: ${stringify(value, depth + 1)}`);
+    const dataArr = Object.entries(item).map(([key, value]) => `${getIndent(depth)}${key}: ${stringify(value, depth + 2)}`);
     return `{\n${dataArr.join('\n')}\n${getIndent(depth - 2)}}`;
   }
   return item;
@@ -19,7 +19,7 @@ const format = (data, depth = 1) => {
     } = item;
     switch (status) {
       case 'removed':
-        return `${getIndent(depth)}- ${name}: ${stringify(value, depth + 2)}`;
+        return `${getIndent(depth)}- ${name}: ${stringify(value, depth + 3)}`;
       case 'added':
         return `${getIndent(depth)}+ ${name}: ${stringify(value, depth + 3)}`;
       case 'unModified':
@@ -32,8 +32,7 @@ const format = (data, depth = 1) => {
         return 'error: "wrong status property value"';
     }
   });
-  //console.log(`{\n${res.join('\n')}\n}`);
-  return `{\n${res.join('\n')}\n${getIndent(depth + 1)}}`;
+  return `{\n${res.join('\n')}\n${getIndent(depth - 1)}}`;
 };
 
 export default format;

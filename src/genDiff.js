@@ -29,7 +29,6 @@ const generateAuxiliaryData = (firstFileData, secondFileData) => {
     }
     return { name: key, status: 'unModified', value: firstFileData[key] };
   });
-  //console.log(getDiff);
   return getDiff;
 };
 
