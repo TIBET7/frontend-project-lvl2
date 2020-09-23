@@ -36,7 +36,6 @@ const genDiff = (firstFile, secondFile) => {
   const firstFileData = parseData(firstFile);
   const secondFileData = parseData(secondFile);
   const auxiliaryData = generateAuxiliaryData(firstFileData, secondFileData);
-  //console.log(auxiliaryData);
   return format(auxiliaryData);
 };
 
