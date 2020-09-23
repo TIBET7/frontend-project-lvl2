@@ -2,7 +2,7 @@ const basicIndent = '  ';
 const getIndent = (depth) => basicIndent.repeat(depth);
 const stringify = (item, depth = 1) => {
   if (typeof item === 'object' && item !== 'null' && !Array.isArray(item)) {
-    const dataArr = Object.entries(item).map(([key, value]) => `${getIndent(depth)}${key}: ${value}`);
+    const dataArr = Object.entries(item).map(([key, value]) => `${getIndent(depth)}${key}: ${stringify(value, depth)}`);
     return `{\n${dataArr.join('\n')}\n${getIndent(depth - 2)}}`;
   }
   return item;
