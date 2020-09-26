@@ -1,6 +1,4 @@
 import _ from 'lodash';
-import parseData from './parsers.js';
-import formatter from './formatters/index.js';
 
 const generateAuxiliaryData = (firstFileData, secondFileData) => {
   const firstFileDataKeys = Object.keys(firstFileData);
@@ -13,13 +11,13 @@ const generateAuxiliaryData = (firstFileData, secondFileData) => {
     if (!_.has(secondFileData, key)) {
       return { name: key, status: 'removed', value: firstFileData[key] };
     }
-    if (typeof firstFileData[key] === 'object' && firstFileData[key] !== 'null'
-    && typeof secondFileData[key] === 'object' && secondFileData[key] !== 'null'
+    if (typeof firstFileData[key] === 'object' && firstFileData[key] !== null
+    && typeof secondFileData[key] === 'object' && secondFileData[key] !== null
     && !Array.isArray(firstFileData[key]) && !Array.isArray(secondFileData[key])) {
       return {
         name: key,
         status: 'parentNode',
-        value: generateAuxiliaryData(firstFileData[key], secondFileData[key]),
+        child: generateAuxiliaryData(firstFileData[key], secondFileData[key]),
       };
     }
     if (firstFileData[key] !== secondFileData[key]) {
@@ -32,12 +30,4 @@ const generateAuxiliaryData = (firstFileData, secondFileData) => {
   return getDiff;
 };
 
-const genDiff = (firstFile, secondFile, format) => {
-  const firstFileData = parseData(firstFile);
-  const secondFileData = parseData(secondFile);
-  const auxiliaryData = generateAuxiliaryData(firstFileData, secondFileData);
-  const targetFormat = formatter(format);
-  return targetFormat(auxiliaryData);
-};
-
-export default genDiff;
+export default generateAuxiliaryData;

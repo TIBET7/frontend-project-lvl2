@@ -3,7 +3,7 @@
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import * as path from 'path';
-import genDiff from '../src/genDiff';
+import genDiff from '../index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -91,7 +91,7 @@ const correctJson = `[
   {
     "name": "common",
     "status": "parentNode",
-    "value": [
+    "child": [
       {
         "name": "follow",
         "status": "added",
@@ -130,11 +130,11 @@ const correctJson = `[
       {
         "name": "setting6",
         "status": "parentNode",
-        "value": [
+        "child": [
           {
             "name": "doge",
             "status": "parentNode",
-            "value": [
+            "child": [
               {
                 "name": "wow",
                 "status": "modified",
@@ -160,7 +160,7 @@ const correctJson = `[
   {
     "name": "group1",
     "status": "parentNode",
-    "value": [
+    "child": [
       {
         "name": "baz",
         "status": "modified",

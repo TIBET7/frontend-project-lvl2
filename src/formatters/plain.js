@@ -1,5 +1,5 @@
 const stringify = (item) => {
-  if (typeof item === 'object' && item !== 'null' && !Array.isArray(item)) {
+  if (typeof item === 'object' && item !== null && !Array.isArray(item)) {
     return '[complex value]';
   }
   return typeof item === 'string' ? `'${item}'` : `${item}`;
@@ -11,6 +11,7 @@ const format = (data, path = '') => {
       name,
       status,
       value,
+      child,
       valueRemoved,
       valueAdded,
     } = item;
@@ -23,9 +24,9 @@ const format = (data, path = '') => {
       case 'modified':
         return `Property '${absolutePath}' was updated. From ${stringify(valueRemoved)} to ${stringify(valueAdded)}`;
       case 'parentNode':
-        return format(value, `${absolutePath}.`);
+        return format(child, `${absolutePath}.`);
       default:
-        return 'error: "wrong status property value"';
+        return `error: ${status} is invalid value for status property`;
     }
   });
   return res.join('\n');
