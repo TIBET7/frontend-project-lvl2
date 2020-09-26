@@ -1,4 +1,4 @@
-# frontend-project-lvl2
+# Вычислитель отличий
 
 <a href="https://codeclimate.com/github/TIBET7/frontend-project-lvl2/maintainability"><img src="https://api.codeclimate.com/v1/badges/6b88f2e2c9f936e71826/maintainability" /></a>
 
@@ -6,14 +6,12 @@
 
 ![eslint-check](https://github.com/TIBET7/frontend-project-lvl2/workflows/eslint-check/badge.svg)
 
-### Вычислитель отличий
-
 Программа определяет разницу между двумя структурами данных.
 
-### Возможности утилиты:
+#### Возможности утилиты:
 
-Поддержка разных форматов входных форматов: yaml, ini, json
-Генерация отчета в виде plain text, stylish и json
+<p>Поддержка разных форматов входных форматов: yaml, ini, json<p>
+<p>Генерация отчета в виде plain text, stylish и json<p>
 
 #### Демонстрации работы приложения:
 
