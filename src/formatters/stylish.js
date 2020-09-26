@@ -8,9 +8,9 @@ const stringify = (item, depth = 1) => {
   return `{\n${dataArr.join('\n')}\n${getIndent(depth - 2)}}`;
 };
 
-const format = (data, depth = 1) => {
+const format = (data) => {
   const iter = (innerData, depth) => {
-    const res = data.map((item) => {
+    const res = innerData.map((item) => {
       const {
         name,
         status,
