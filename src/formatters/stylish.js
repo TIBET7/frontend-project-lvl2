@@ -31,12 +31,12 @@ const format = (data) => {
         case 'parentNode':
           return `${getIndent(depth)}  ${name}: ${format(child, depth + 2)}`;
         default:
-          return 'error: "wrong status property value';
+          return `error: ${status} is invalid value for status property`;
       }
     });
-    return `{\n${res.join('\n')}\n${getIndent(depth - 1)}}`;
+    return res.join('\n');
   };
-  return iter(data, 1);
+  return `{\n${iter(data, 1)}\n}`;
 };
 
 export default format;
