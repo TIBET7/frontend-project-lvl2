@@ -1,9 +1,20 @@
 const stringify = (item) => {
-  if (typeof item === 'object' && item !== null && !Array.isArray(item)) {
-    return '[complex value]';
+  switch (typeof item) {
+    case 'object':
+      return '[complex value]';
+    case null:
+      return null;
+    case 'string':
+      return `'${item}'`;
+    default:
+      return `${item}`;
   }
-  return typeof item === 'string' ? `'${item}'` : `${item}`;
 };
+//   if (typeof item === 'object' && item !== null && !Array.isArray(item)) {
+//     return '[complex value]';
+//   }
+//   return typeof item === 'string' ? `'${item}'` : `${item}`;
+// };
 
 const format = (data, path = '') => {
   const res = data.filter((item) => !(item.status === 'unModified')).map((item) => {
