@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import parseData from './parsers.js';
-import format from './stylish.js';
+import formatter from './formatters/index.js';
 
 const generateAuxiliaryData = (firstFileData, secondFileData) => {
   const firstFileDataKeys = Object.keys(firstFileData);
@@ -32,11 +32,12 @@ const generateAuxiliaryData = (firstFileData, secondFileData) => {
   return getDiff;
 };
 
-const genDiff = (firstFile, secondFile) => {
+const genDiff = (firstFile, secondFile, format) => {
   const firstFileData = parseData(firstFile);
   const secondFileData = parseData(secondFile);
   const auxiliaryData = generateAuxiliaryData(firstFileData, secondFileData);
-  return format(auxiliaryData);
+  const targetFormat = formatter(format);
+  return targetFormat(auxiliaryData);
 };
 
 export default genDiff;

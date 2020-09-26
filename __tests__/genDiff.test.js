@@ -85,12 +85,135 @@ Property 'common.setting6.ops' was added with value: 'vops'
 Property 'group1.baz' was updated. From 'bas' to 'bars'
 Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
-Property 'group3' was added with value: [complex value]`
+Property 'group3' was added with value: [complex value]`;
+
+const correctJson = `[
+  {
+    "name": "common",
+    "status": "parentNode",
+    "value": [
+      {
+        "name": "follow",
+        "status": "added",
+        "value": false
+      },
+      {
+        "name": "setting1",
+        "status": "unModified",
+        "value": "Value 1"
+      },
+      {
+        "name": "setting2",
+        "status": "removed",
+        "value": 200
+      },
+      {
+        "name": "setting3",
+        "status": "modified",
+        "valueRemoved": true,
+        "valueAdded": {
+          "key": "value"
+        }
+      },
+      {
+        "name": "setting4",
+        "status": "added",
+        "value": "blah blah"
+      },
+      {
+        "name": "setting5",
+        "status": "added",
+        "value": {
+          "key5": "value5"
+        }
+      },
+      {
+        "name": "setting6",
+        "status": "parentNode",
+        "value": [
+          {
+            "name": "doge",
+            "status": "parentNode",
+            "value": [
+              {
+                "name": "wow",
+                "status": "modified",
+                "valueRemoved": "too much",
+                "valueAdded": "so much"
+              }
+            ]
+          },
+          {
+            "name": "key",
+            "status": "unModified",
+            "value": "value"
+          },
+          {
+            "name": "ops",
+            "status": "added",
+            "value": "vops"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "group1",
+    "status": "parentNode",
+    "value": [
+      {
+        "name": "baz",
+        "status": "modified",
+        "valueRemoved": "bas",
+        "valueAdded": "bars"
+      },
+      {
+        "name": "foo",
+        "status": "unModified",
+        "value": "bar"
+      },
+      {
+        "name": "nest",
+        "status": "modified",
+        "valueRemoved": {
+          "key": "value"
+        },
+        "valueAdded": "str"
+      }
+    ]
+  },
+  {
+    "name": "group2",
+    "status": "removed",
+    "value": {
+      "abc": 12345,
+      "deep": {
+        "id": 45
+      }
+    }
+  },
+  {
+    "name": "group3",
+    "status": "added",
+    "value": {
+      "fee": 100500,
+      "deep": {
+        "id": {
+          "number": 45
+        }
+      }
+    }
+  }
+]`;
 
 test('genDiff', () => {
-  // expect(genDiff(firstJsonFile, secondJsonFile)).toEqual(correctPlain);
-  // expect(genDiff(firstYamlFile, secondYamlFile)).toEqual(correctPlain);
-  // expect(genDiff(firstInilFile, secondInilFile)).toEqual(correctPlain);
-  // expect(genDiff(firstJsonRecursiveFile, secondJsonRecursiveFile)).toEqual(correctStylishRecursive);
-  expect(genDiff(firstJsonRecursiveFile, secondJsonRecursiveFile)).toEqual(correctPlainRecursive);
+  expect(genDiff(firstJsonFile, secondJsonFile, 'stylish')).toEqual(correctPlain);
+  expect(genDiff(firstYamlFile, secondYamlFile, 'stylish')).toEqual(correctPlain);
+  expect(genDiff(firstInilFile, secondInilFile, 'stylish')).toEqual(correctPlain);
+  expect(genDiff(firstJsonRecursiveFile, secondJsonRecursiveFile, 'stylish'))
+    .toEqual(correctStylishRecursive);
+  expect(genDiff(firstJsonRecursiveFile, secondJsonRecursiveFile, 'plain'))
+    .toEqual(correctPlainRecursive);
+  expect(genDiff(firstJsonRecursiveFile, secondJsonRecursiveFile, 'json'))
+    .toEqual(correctJson);
 });
