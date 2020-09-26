@@ -1,22 +1,17 @@
-import fs from 'fs';
-import path from 'path';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-const parseData = (filePath) => {
-  const absolutePath = path.resolve(process.cwd(), filePath);
-  const format = path.extname(filePath);
-  let fileData;
+const parseData = (format, data) => {
   if (format === '.json') {
-    fileData = JSON.parse(fs.readFileSync(absolutePath, 'utf-8'));
+    return JSON.parse(data);
   }
   if (format === '.yml') {
-    fileData = yaml.safeLoad(fs.readFileSync(absolutePath, 'utf-8'));
+    return yaml.safeLoad(data);
   }
   if (format === '.ini') {
-    fileData = ini.parse(fs.readFileSync(absolutePath, 'utf-8'));
+    return ini.parse(data);
   }
-  return fileData;
+  return `error: ${format} is invalid format`;
 };
 
 export default parseData;
