@@ -30,6 +30,24 @@ WrkXyhR81vQyQXU7vCw05i0gl>Рекурсивное сравнение файлов
 <p><a href = https://asciinema.org/a/31EwY4awdSTLAWLjhhU9PeNf1
 WrkXyhR81vQyQXU7vCw05i0gl>Рекурсивное сравнение файлов. Формат JSON.</a></p>
 
+#### Установка:
+
+```sh
+$ make install
+```
+#### Справка:
+
+```sh
+$ make start
+
+```
+#### Запуск:
+
+```sh
+$ gendiff -f <format> <file1Path> <file2Path>
+
+```
+
 
 
 
