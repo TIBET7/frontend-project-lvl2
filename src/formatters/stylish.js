@@ -1,7 +1,9 @@
+import _ from 'lodash';
+
 const basicIndent = '  ';
 const getIndent = (depth) => basicIndent.repeat(depth);
 const stringify = (item, depth = 1) => {
-  if (typeof item !== 'object' || item === null || Array.isArray(item)) {
+  if (!_.isPlainObject(item)) {
     return item;
   }
   const dataArr = Object.entries(item).map(([key, value]) => `${getIndent(depth)}${key}: ${stringify(value, depth + 2)}`);

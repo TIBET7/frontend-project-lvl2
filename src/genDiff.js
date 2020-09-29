@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-const generateAuxiliaryData = (data1, data2) => {
-  const firstFileDataKeys = Object.keys(data1);
-  const secondFileDataKeys = Object.keys(data2);
-  const sharedKeys = _.union(firstFileDataKeys, secondFileDataKeys).sort();
+const genDiff = (data1, data2) => {
+  const data1Keys = Object.keys(data1);
+  const data2Keys = Object.keys(data2);
+  const sharedKeys = _.union(data1Keys, data2Keys).sort();
   const getDiff = sharedKeys.map((key) => {
     if (!_.has(data1, key)) {
       return { name: key, status: 'added', value: data2[key] };
@@ -11,13 +11,11 @@ const generateAuxiliaryData = (data1, data2) => {
     if (!_.has(data2, key)) {
       return { name: key, status: 'removed', value: data1[key] };
     }
-    if (typeof data1[key] === 'object' && data1[key] !== null
-    && typeof data2[key] === 'object' && data2[key] !== null
-    && !Array.isArray(data1[key]) && !Array.isArray(data2[key])) {
+    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
       return {
         name: key,
         status: 'parentNode',
-        child: generateAuxiliaryData(data1[key], data2[key]),
+        child: genDiff(data1[key], data2[key]),
       };
     }
     if (data1[key] !== data2[key]) {
@@ -30,4 +28,4 @@ const generateAuxiliaryData = (data1, data2) => {
   return getDiff;
 };
 
-export default generateAuxiliaryData;
+export default genDiff;

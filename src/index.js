@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import parseData from './src/parsers.js';
-import formatData from './src/formatters/index.js';
-import generateAuxiliaryData from './src/genAuxData.js';
+import parseData from './parsers.js';
+import formatData from './formatters/index.js';
+import genDiff from './genDiff.js';
 
 const getParsedData = (filePath) => {
   const absolutePath = path.resolve(process.cwd(), filePath);
@@ -12,11 +12,11 @@ const getParsedData = (filePath) => {
   return parsedFileData;
 };
 
-const genDiff = (firstFilePath, secondFilePath, format) => {
+const getDiff = (firstFilePath, secondFilePath, format) => {
   const firstFileData = getParsedData(firstFilePath);
   const secondFileData = getParsedData(secondFilePath);
-  const auxiliaryData = generateAuxiliaryData(firstFileData, secondFileData);
+  const auxiliaryData = genDiff(firstFileData, secondFileData);
   return formatData(auxiliaryData, format);
 };
 
-export default genDiff;
+export default getDiff;
