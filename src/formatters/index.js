@@ -2,14 +2,17 @@ import stylish from './stylish.js';
 import plain from './plain.js';
 import json from './json.js';
 
-const formatters = {
-  stylish,
-  plain,
-  json,
+const formatData = (data, format) => {
+  switch (format) {
+    case 'stylish':
+      return stylish(data);
+    case 'plain':
+      return plain(data);
+    case 'json':
+      return json(data);
+    default:
+      return `error: ${format} is invalid format`;
+  }
 };
 
-const formatData = (data, format) => {
-  const formatter = formatters[format];
-  return formatter(data);
-};
 export default formatData;

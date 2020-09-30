@@ -15,8 +15,8 @@ const getParsedData = (filePath) => {
 const getDiff = (firstFilePath, secondFilePath, format = 'stylish') => {
   const firstFileData = getParsedData(firstFilePath);
   const secondFileData = getParsedData(secondFilePath);
-  const auxiliaryData = genDiff(firstFileData, secondFileData);
-  return formatData(auxiliaryData, format);
+  const diff = genDiff(firstFileData, secondFileData);
+  return formatData(diff, format);
 };
 
 export default getDiff;

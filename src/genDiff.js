@@ -4,7 +4,7 @@ const genDiff = (data1, data2) => {
   const data1Keys = Object.keys(data1);
   const data2Keys = Object.keys(data2);
   const sharedKeys = _.union(data1Keys, data2Keys).sort();
-  const getDiff = sharedKeys.map((key) => {
+  const diffData = sharedKeys.map((key) => {
     if (!_.has(data1, key)) {
       return { name: key, status: 'added', value: data2[key] };
     }
@@ -15,7 +15,7 @@ const genDiff = (data1, data2) => {
       return {
         name: key,
         status: 'parentNode',
-        child: genDiff(data1[key], data2[key]),
+        children: genDiff(data1[key], data2[key]),
       };
     }
     if (data1[key] !== data2[key]) {
@@ -25,7 +25,7 @@ const genDiff = (data1, data2) => {
     }
     return { name: key, status: 'unModified', value: data1[key] };
   });
-  return getDiff;
+  return diffData;
 };
 
 export default genDiff;
