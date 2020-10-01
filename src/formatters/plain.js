@@ -1,7 +1,4 @@
 const stringify = (item) => {
-  if (item === null) {
-    return null;
-  }
   switch (typeof item) {
     case 'object':
       return '[complex value]';

@@ -8,6 +8,7 @@ const parseData = (fileFormat, data) => {
     case 'yml':
       return yaml.safeLoad(data);
     case 'ini':
+      console.log(ini.parse(data));
       return ini.parse(data);
     default:
       return `error: ${fileFormat} is invalid fileFormat`;
