@@ -11,7 +11,7 @@ const stringify = (item) => {
 
 const format = (data) => {
   const iter = (innerData, path = '') => {
-    const res = innerData.filter((item) => !(item.status === 'unModified')).map((item) => {
+    const result = innerData.filter((item) => !(item.status === 'unModified')).map((item) => {
       const fullPath = `${path}${item.name}`;
       switch (item.status) {
         case 'removed':
@@ -26,7 +26,7 @@ const format = (data) => {
           return `error: ${item.status} is invalid value for status property`;
       }
     });
-    return res.join('\n');
+    return result.join('\n');
   };
   return iter(data);
 };

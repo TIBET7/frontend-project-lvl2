@@ -2,20 +2,34 @@ import yaml from 'js-yaml';
 import ini from 'ini';
 import _ from 'lodash';
 
-const parseNumber = (data) => {
-  const newData = JSON.parse(JSON.stringify(data));
-  const dataKeys = Object.keys(newData);
-  dataKeys.map((key) => {
+const changeValueToNumber = (data) => {
+  const dataKeys = Object.keys(data);
+  return dataKeys.reduce((acc, key) => {
     if (_.isPlainObject(data[key])) {
-      newData[key] = parseNumber(data[key]);
+      acc[key] = changeValueToNumber(data[key]);
     }
-    if (parseInt(data[key], 10)) {
-      newData[key] = parseInt(data[key], 10);
+    if (!Number.isNaN(parseFloat(data[key], 10))) {
+      acc[key] = parseFloat(data[key], 10);
     }
-    return newData[key];
-  });
-  return newData;
+    acc[key] = data[key];
+    return acc;
+  }, {});
 };
+
+// const changeValueToNumber = (data) => {
+//   const newData = JSON.parse(JSON.stringify(data));
+//   const dataKeys = Object.keys(newData);
+//   dataKeys.map((key) => {
+//     if (_.isPlainObject(data[key])) {
+//       newData[key] = changeValueToNumber(data[key]);
+//     }
+//     if (!Number.isNaN(parseFloat(data[key], 10))) {
+//       newData[key] = parseFloat(data[key], 10);
+//     }
+//     return newData[key];
+//   });
+//   return newData;
+// };
 
 const parseData = (fileFormat, data) => {
   switch (fileFormat) {
@@ -24,7 +38,7 @@ const parseData = (fileFormat, data) => {
     case 'yml':
       return yaml.safeLoad(data);
     case 'ini':
-      return parseNumber(ini.parse(data));
+      return changeValueToNumber(ini.parse(data));
     default:
       return `error: ${fileFormat} is invalid fileFormat`;
   }
