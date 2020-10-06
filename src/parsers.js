@@ -9,8 +9,8 @@ const changeValueToNumber = (data) => {
       acc[key] = changeValueToNumber(data[key]);
       return acc;
     }
-    if (!Number.isNaN(parseFloat(data[key], 10))) {
-      acc[key] = parseFloat(data[key], 10);
+    if (!Number.isNaN(parseFloat(data[key]))) {
+      acc[key] = parseFloat(data[key]);
       return acc;
     }
     acc[key] = data[key];
