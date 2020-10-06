@@ -3,7 +3,7 @@ import _ from 'lodash';
 const basicIndent = '  ';
 const getIndent = (depth) => basicIndent.repeat(depth);
 const stringify = (item, depth = 1) => {
-  if (!_.isPlainObject(item)) {
+  if (!_.isObject(item)) {
     return item;
   }
   const result = Object.entries(item).map(([key, value]) => `${getIndent(depth)}${key}: ${stringify(value, depth + 2)}`);
