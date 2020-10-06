@@ -7,29 +7,16 @@ const changeValueToNumber = (data) => {
   return dataKeys.reduce((acc, key) => {
     if (_.isPlainObject(data[key])) {
       acc[key] = changeValueToNumber(data[key]);
+      return acc;
     }
     if (!Number.isNaN(parseFloat(data[key], 10))) {
       acc[key] = parseFloat(data[key], 10);
+      return acc;
     }
     acc[key] = data[key];
     return acc;
   }, {});
 };
-
-// const changeValueToNumber = (data) => {
-//   const newData = JSON.parse(JSON.stringify(data));
-//   const dataKeys = Object.keys(newData);
-//   dataKeys.map((key) => {
-//     if (_.isPlainObject(data[key])) {
-//       newData[key] = changeValueToNumber(data[key]);
-//     }
-//     if (!Number.isNaN(parseFloat(data[key], 10))) {
-//       newData[key] = parseFloat(data[key], 10);
-//     }
-//     return newData[key];
-//   });
-//   return newData;
-// };
 
 const parseData = (fileFormat, data) => {
   switch (fileFormat) {
